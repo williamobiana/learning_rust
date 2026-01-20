@@ -2,10 +2,24 @@ hello()                 = function
 hello!()                = macro (function that can do stuff, just like lambdas)
 ;                       = end of sentence
 cargo                   = package manager similar to pip or npm, but also initializes & build projects in a folder
+cargo new PROJECT_NAME  = create a new project with cargo
 cargo.toml              = similar to requirements.txt or package.json
 cargo build             = build/compile the project
 ./PATH_TO_FILE          = run a compiled executable file
-cargo run               = build/compile the project and run it execututable file
+cargo run               = build/compile the project and run the execututable file
 cargo check             = check if the code compiles without building an executable
 cargo build --release   = compile and build an executable in a release folder for publishing
+./target/debug          = dev env
+./release/*             = publish envs
+---
+let                     = creates a variable
 
+/*
+mut                     = makes the variable mutable (can be changed)
+
+variables are immutable by default.
+let apples = 5; //immutable
+let mut apples = 5; //mutable that can be changed
+*/
+
+String::new()           = creates a new empty string
