@@ -12,7 +12,7 @@ cargo build --release   = compile and build an executable in a release folder fo
 ./target/debug          = dev env
 ./release/*             = publish envs
 ---
-let                     = creates a variable
+let                     = creates a new variable
 
 /*
 mut                     = makes the variable mutable (can be changed)
