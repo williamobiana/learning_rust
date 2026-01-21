@@ -28,8 +28,23 @@ fn main() {
     */
     //println!("The secret number is: {}", secret_number); // for debugging purposes
 
+    let mut tries = 0;
+    const MAX_TRIES: u32 = 3;
+
     // Create a loop to allow multiple guesses
     loop {
+        // check if the user has exceeded the maximum number of tries
+        if tries >= MAX_TRIES {
+            println!("Sorry, you've exceeded your maximum of {} tries.", MAX_TRIES);
+            println!("The secret number was: {}", secret_number);
+            break;
+        }
+
+        // increment the number of tries
+        tries += 1; // increment the number of tries
+        println!("Attempt {} of {}", tries, MAX_TRIES);        
+
+        // input the user's guess
         println!("Please input your guess.");
 
         // create an empty mutable variable
@@ -66,7 +81,7 @@ fn main() {
         .parse()       = converts the string to a number
         .expect(...)   = handles errors if parsing fails
         */
-
+        
         // print the user's guess
         println!("You guessed: {}", guess);
 
