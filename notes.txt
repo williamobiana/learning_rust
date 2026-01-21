@@ -28,4 +28,5 @@ add library packages[crates] to the dependencies section of Cargo.toml to use th
 cargo doc --open        = to see all the documentations, commands and functions of all the library/crate and project
 we can overwrite variable with the same name. Example overwriting a `mut var` with an immutable `var` based on the hieracy of the logic (Top-down)
 
+.expect = is an error handler, but can cause the code to panic and end when it encounters an error.
 _ = ignore. This is typically used when you want to ignore errors during error_handling that can stop the code from running. 
