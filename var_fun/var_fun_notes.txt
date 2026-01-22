@@ -1,0 +1,27 @@
+CONSTANTS (const) vs IMMUTABLE VARIABLES
+Constants & immutable variables are similar since the values assigned cannot be changed.
+Examples:
+let x = 5
+const DEV_ENV = "dev"
+
+
+VARIABLES SHADOWING 
+Immutable variables can be overshadowed/overwritten (if you create 2 variables with the same name, the 2nd will overwrite the 1st)
+Constants cannot be overshadowed
+    Example 1:
+    let x = 5
+    let x = 6 (6 will overwrite 5)
+
+using mut we can also overwrite the variable, without creating a new 1
+    Example 2:
+    let mut x = 5
+    x = 6
+    However, If the 2 variables are of diffrent types, it will throw an error
+
+In this case it is better to create 2 variables (Example 1)
+
+
+VARIABLES EXECUTION
+Immutable variables are executed in run-time (good for function variables)
+Constants are executed in compile (good for ENVIRONMENT_VARIABLES and Global Variables)
+

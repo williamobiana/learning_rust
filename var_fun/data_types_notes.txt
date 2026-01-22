@@ -1,0 +1,47 @@
+let variable: <data_type> = ... (Assigning a data type to a variable)
+Most times Rust can guess the data type, unless you explicitly want to give it a type
+
+SINGLE VALUE DATA TYPE (Scalar)
+
+* integers (whole numbers) //bits: 8, 16, 32, 64, 128
+    * i32 (signed: can have + or - sign)
+    * u32 (unsigned: defaults to only + sign)
+    * isize/usize (sign that match your computer architecture)
+
+    interger overflow: CONCEPT UNCLEAR
+
+* floating number (decimals) //bits: f32, f64
+    *f64 is default
+
+* booleans (true/false)
+    * commonly used with conditions (if statements)
+
+* characters (unicode characters) //example: emojis
+    * single quotes '' for characters
+    * double quotes "" for strings
+
+COMPOUND DATA TYPE
+
+* tuple (immutable list of diffrent values types)
+    * let person = ("john", 35, true);
+    * let person: (&str, i32, bool) = ("john", 35, true);
+
+    There are 2 ways to call the value from the tuple
+    1. Unpacking
+        let (name, age, employed) = person;
+    2. using .index
+        let name        = person.0;
+        let age         = person.1;
+        let employed    = person.2;
+
+    tuple can be mutable by adding mut when creating the variable
+        let mut scores = (1, 2, 3);
+        scores.0 = 5;
+        scores.1 += 8; //using operations to modify the previous values
+
+    tuple can also be empty
+        let nothing = (); //to return an empty list
+
+* list/array (mutable list of same value types)
+TODO
+...
