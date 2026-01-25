@@ -1,0 +1,141 @@
+IF - ELSE
+
+------------------------
+Traditional Example
+------------------------
+let number = 3;
+
+if number < 5 {
+    println!("Number is less than 5");
+} else if number > 5 {
+    println!("Number is greater than 5");
+} else {
+    println!("Number is 5");
+
+Note: Condition must be boolean
+// CORRECT:
+if number > 0 { ... }           // Uses comparison (returns bool)
+if is_valid { ... }             // Uses boolean variable
+
+// WRONG (won't compile):
+if number { ... }               // ERROR: number is i32, not bool
+if 1 { ... }                    // ERROR: 1 is integer, not bool
+
+------------------------
+Assigning if result to variable:
+------------------------
+When ever you call the variable it runs the condtion
+fn main() {
+    let condition = true;
+    let number = if condition { 5 } else { 6 }; 
+    // number = 5 because the conditon variable is assigned true, if condition variable was false, then number = 6
+    // both data types for the if condition must be the same else there would be a compiler error.
+
+    println!("The value of number is: {number}");
+}
+
+------------------------
+Nested if conditions
+------------------------
+if age >= 18 {
+    if has_license {
+        println!("You can drive!");
+    } else {
+        println!("You need a license");
+    }
+} else {
+    println!("Too young to drive");
+}
+
+------------------------
+Multiple value for if condition using && or || or !
+------------------------
+if x > 0 && x < 10 {    // AND: both must be true
+    println!("x is between 0 and 10");
+}
+
+if x < 0 || x > 100 {   // OR: at least one true
+    println!("x is out of range");
+}
+
+if !is_valid {          // NOT: reverses boolean
+    println!("Invalid input");
+}
+------------------------
+------------------------
+------------------------
+------------------------
+
+LOOPS
+loop - Infinite loop (goes forever)
+while - Loop while condition is true
+for - Loop through collections or ranges
+
+------------------------
+Loop
+------------------------
+let mut count = 0;
+loop {
+    println!("Count: {count}");
+    count += 1;
+    
+    if count == 5 {
+        break;  // Use Break to Exit the loop
+    }
+}
+
+you can assign the loop to a variable so you can get its values
+let mut count = 0;
+let x = loop {...}
+println!("{x}")
+
+When you have loops inside loops, we have to label them to diffrenciate
+'outer: loop {          // Label with ' operator
+    println!("Outer loop");
+    
+    loop {
+        println!("Inner loop");
+        break 'outer;   // Break OUTER loop, not just inner
+    }
+}
+// Only prints "Outer loop" then "Inner loop" once
+
+------------------------
+While
+------------------------
+let mut number = 3;
+while number > 0 {
+    println!("{number}!");
+    number -= 1;
+}
+println!("LIFTOFF!");
+
+------------------------
+For
+------------------------
+let arr = [10, 20, 30, 40, 50];
+for element in arr {
+    println!("Value: {element}");
+}
+
+// Count up: 1, 2, 3
+for number in 1..4 {  // 1 to 3 (exclusive of 4)
+    println!("{number}!");
+}
+
+// Count down: 3, 2, 1
+for number in (1..4).rev() {  // Reverse the range
+    println!("{number}!");
+}
+
+// Inclusive of the last number in a range
+for number in 1..=3 {  // 1 to 3 (inclusive)
+    println!("{number}");
+}
+
+------------------------
+Ending, Skipping a Loop
+------------------------
+break;
+return;
+continue;

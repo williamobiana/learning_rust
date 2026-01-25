@@ -63,6 +63,6 @@ The reason for using expressoion functions is if we want to create a statement f
     }
 * Using statements
     fn main() {
-        let x = example(1,2); //assning the expresion function to a varaible
+        let x = example(1,2); //assigning the expresion function to a varaible to get its values
         println!("{x}");
     }
