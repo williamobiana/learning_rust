@@ -1,0 +1,68 @@
+------------------------
+When writing function we must specify type so that it can compile
+------------------------
+// CORRECT:
+fn add(x: i32, y: i32) {
+    println!("Sum: {}", x + y);
+}
+
+// WRONG (won't compile):
+fn add(x, y) {  // ERROR: What types are x and y?
+    println!("Sum: {}", x + y);
+}
+
+------------------------
+We can use mulitple data types
+------------------------
+fn print_info(name: &str, age: i32, is_student: bool) {
+    println!("Name: {name}, Age: {age}, Student: {is_student}");
+}
+
+fn main() {
+    print_info("Alice", 25, true);
+    print_info("Bob", 30, false);
+}
+
+------------------------
+Using functions as validators
+------------------------
+fn is_adult(age: i32) -> bool {
+    age >= 18
+}
+// -> means return
+// -> bool means the function should return a bool
+
+------------------------
+Functions have statements or expressions or both
+------------------------
+* Statements (they do not return values and ends with a semicolon ;)
+    let x = 5;            // Statement - creates variable
+    println!("Hello");    // Statement - prints, returns text
+
+    Statements dont return values
+    // This WON'T work:
+    let y = (let x = 5);  // ERROR! Can't assign a statement to variable
+
+* Expressions (they return values and does not end with a semicolon)
+    5 + 3                 // Expression → 8
+    add(5, 3)             // Expression → return value
+    x                     // Expression → value of x
+
+Using a statment + expression
+let y = {
+    let x = 3;      // Statement inside block
+    x + 1           // Expression - last line, NO SEMICOLON!
+};                  
+
+println!("y = {y}"); // y = 4
+
+The reason for using expressoion functions is if we want to create a statement function that returns a values
+* Using expression
+    fn example(a: i32, b: i32) -> i32 {
+        a + b
+    }
+* Using statements
+    fn main() {
+        let x = example(1,2); //assning the expresion function to a varaible
+        println!("{x}");
+    }
