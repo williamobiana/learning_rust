@@ -1,0 +1,77 @@
+The Problem: Moving is Inconvenient
+fn main() {
+    let book = String::from("Great Book");
+    read_book(book);        // Give book away...read_book() now owns var book 
+    // read_book_again(book); // ERROR! Book is gone!...read_book_again() cannot use var book because it is already owned
+}
+
+Solution: Borrowing (Lending)
+fn main() {
+    let book = String::from("Great Book");
+    borrow_book(&book);     // Lend the book...& = operator that points to where the data is stored...in this scenario we are pointing to the data in var book
+    borrow_book_again(&book); // Can lend again!...because we are only pointing to the data, var book is not owned by anyone
+    // Still have the book
+}
+
+fn borrow_book(b: &String) {  // & means "borrow"...we have to define the function to read the data from the variable by adding the '&' operator
+    println!("Reading: {}", b);
+}
+
+
+---------------------------------------------------------------------------------
+& = operator that points to where the data is stored a.k.a borrow a.k.a reference
+---------------------------------------------------------------------------------
+
+
+Two Types of References:
+1. Immutable References (&var)
+    let s = String::from("hello");
+    let r1 = &s;  // Can read but not modify
+    let r2 = &s;  // Multiple readers OK
+    // r1.push_str("!");  // ERROR! Can't modify &s because it is immutable, even though we are pointing to the data.
+
+2. Mutable References (&mut var)
+    let mut s = String::from("hello");
+    let r = &mut s;  // Can read and modify
+    r.push_str(" world");
+    // let r2 = &s;  // ERROR! Can't have other references while mutable ref exists because r already owns &mut s 
+
+
+The Borrowing Rules (THE BIG RULES):
+Rule 1: At any time, you can have EITHER:
+    * One mutable reference (&mut)
+    * OR many immutable references (&)
+    * BUT NOT both at the same time!
+
+Rule 2: References must always be valid
+    * (No dangling pointers to freed memory)
+
+Rule 3: When using sequetial borrowing, the memory should be free, else use a clone
+    let mut s = String::from("hello");
+    let r1 = &s;          // Read-only borrow
+    println!("{}", r1);   // Done with r1
+    let r2 = &mut s;      // Now mutable borrow OK
+    r2.push_str(" world");
+
+Rule 4: Dereferencing means do not reference/borrow rather follow the pointer to the variable where the data is stored
+    let x = 5;
+    let r = &x;      // r points to x
+    let y = *r;      // * means "follow pointer to get value"
+    // y = 5
+
+    Dereferencing with modification:
+    let mut s = String::from("hello");
+    let r = &mut s;
+    *r = String::from("world");  // Modify through reference    
+
+    Dereferencing with methods:
+    let s = String::from("hello");
+    let len1 = s.len();          // Automatically works on &s
+    let len2 = (&s).len();       // Same thing, explicit
+    let len3 = (*&s).len();      // Also works!    
+
+---------------------------------------------------------------------------------
+* = operator that does not reference/borrow rather follow the pointer to the variable where the data is stored
+---------------------------------------------------------------------------------
+
+

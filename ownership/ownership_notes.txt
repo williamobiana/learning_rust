@@ -1,0 +1,39 @@
+Programs need "rooms" (memory) to store data
+They must check out when done (deallocate)
+
+Stack vs Heap
+
+Stack:
+Variables live on the STACK, can store small amounts of memory, and is automatically cleaned up when function ends
+let x = 5;  // Stored on stack
+let y = x;  // COPY value (5 is small)
+
+Heap:
+Boxes live on the HEAP, can store large amounts of memory, and is manually cleaned up when function ends
+let a = Box::new([0; 1_000_000]);  // Big array on heap
+let b = a;  // MOVE pointer, not copy data
+
+
+The Ownership Rules:
+Rule 1: Each value has ONE owner
+    let s1 = String::from("hello");  // s1 owns "hello"
+    let s2 = s1;                     // Ownership MOVES to s2
+    // println!("{}", s1);           // ERROR! s1 lost ownership
+
+Rule 2: When owner goes out of scope, value is dropped
+    {
+        let s = String::from("hello");  // Created
+        // do stuff
+    }        
+
+Cloning vs Moving:
+Moving (default):
+    let s1 = String::from("hello");
+    let s2 = s1;            // MOVES ownership
+    // s1 is now invalid
+
+Cloning (explicit copy):
+    let s1 = String::from("hello");
+    let s2 = s1.clone();    // COPIES the data
+    // Both s1 and s2 are valid
+
