@@ -71,7 +71,66 @@ Rule 4: Dereferencing means do not reference/borrow rather follow the pointer to
     let len3 = (*&s).len();      // Also works!    
 
 ---------------------------------------------------------------------------------
-* = operator that does not reference/borrow rather follow the pointer to the variable where the data is stored
+* = operator that does not reference/borrow rather follows the variable where the data is stored
 ---------------------------------------------------------------------------------
 
+Rust's Permissions System
+Read, Write, Own (RWO)
 
+Immutable reference for reading (&)
+let mut v = vec![1, 2, 3];  // v has: R, W, O
+let r = &v[0];              // v has: R only (can't write or move)
+                            // r has: R, O (can read)
+                            // *r has: R only
+
+Mutable reference (&mut)
+let mut v = vec![1, 2, 3];  // v has: R, W, O
+let mr = &mut v[0];         // v has: NO permissions! Can't use at all
+                            // mr has: R, O
+                            // *mr has: R, W                                         
+
+Borrowing with Vectors (This is diffrent from Strings)
+Think of it like editing a shared document:
+
+    Problem:
+        let mut v = vec![1, 2, 3];
+        let r = &v[0];            // v loses W, O permissions
+        v.push(4);               // ERROR! Can't write while reading
+        println!("{}", r);      // OOPS! Might print garbage
+
+    Solution: Read, write and release
+        let mut v = vec![1, 2, 3];
+        let r = &v[0];    // v loses W, O permissions
+        println!("{}", r); // Reading done
+        // v regains W, O permissions here
+        v.push(4);        // Now writing is OK
+
+Borrow checker:
+
+    Problem:
+        let mut v = vec![1, 2, 3];
+        let r = &v[0];            // v loses W, O permissions
+        v.push(4);               // ERROR! Can't write while reading
+        println!("{}", r);      // OOPS! Might print garbage
+    logs:
+        Line 1: v created with R, W, O permissions
+        Line 2: r = &v[0] → v loses W, O permissions
+        Line 3: v.push(4) → ERROR! v needs W permission
+        Line 4: println! → Would need r, but already errored
+
+Lifetimes: Permissions return when references stop being used
+    Solution: Read, write and release
+        let mut v = vec![1, 2, 3];
+        let r = &v[0];    // v loses W, O permissions
+        println!("{}", r); // r's lifetime ends here
+        v.push(4);        // v regains W, O permissions here
+    Different branches have different lifetimes:
+        let mut v = vec![1, 2, 3];
+        let r = &v[0];        // v loses W, O
+
+        if condition {
+            println!("{}", r); // r used here, v doesn't get W back yet
+        } else {
+            // r NOT used here, v gets W back immediately!
+            v.push(4);        // OK in this branch!
+        }

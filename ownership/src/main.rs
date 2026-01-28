@@ -1,15 +1,7 @@
-fn calculate_length(s: &String) -> usize {
-    s.len()  // Can read but not modify
-}
-
-fn modify_string(s: &mut String) {
-    s.push_str(" modified");
-}
-
 fn main() {
-    let mut text = String::from("Hello");
-    let len = calculate_length(&text);
-    modify_string(&mut text);
-    
-    println!("The length of '{}' is {}.", text, len);
+let mut v: Vec<i32> = vec![1, 2, 3];
+let num: &mut i32 = &mut v[2];
+*num += 1;
+println!("Third element is {}", *num);
+println!("Vector is now {:?}", v);
 }
